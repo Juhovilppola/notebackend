@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
-  `mongodb+srv://fullstack:TaysiKasa22@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:TaysiKasa22@cluster0.lp3oxnt.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect(url)
 
