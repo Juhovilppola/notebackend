@@ -9,11 +9,7 @@ app.use(cors())
 const Note = require('./models/note')
 
 
-// ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
-const url =
-  `mongodb+srv://fullstack:TaysiKasa22@cluster0.lp3oxnt.mongodb.net/noteApp?retryWrites=true&w=majority`
 
-mongoose.connect(url)
 
 let notes = [
   {
