@@ -4,6 +4,21 @@ const app = express()
 const cors = require('cors')
 
 app.use(cors())
+const mongoose = require('mongoose')
+
+// ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
+const url =
+  `mongodb+srv://fullstack:TaysiKasa22@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+
+mongoose.connect(url)
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  date: Date,
+  important: Boolean,
+})
+
+const Note = mongoose.model('Note', noteSchema)
 
 let notes = [
   {
@@ -71,8 +86,10 @@ app.post('/api/notes', (request, response) => {
   response.json(note)
 })
 
-app.get('/api/notes', (req, res) => {
-  res.json(notes)
+app.get('/api/notes', (request, response) => {
+  Note.find({}).then(notes => {
+    response.json(notes)
+  })
 })
 
 app.delete('/api/notes/:id', (request, response) => {
