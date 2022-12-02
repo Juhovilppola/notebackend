@@ -1,24 +1,19 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 
 const cors = require('cors')
 
 app.use(cors())
-const mongoose = require('mongoose')
+
+const Note = require('./models/note')
+
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
   `mongodb+srv://fullstack:TaysiKasa22@cluster0.lp3oxnt.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.connect(url)
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  date: Date,
-  important: Boolean,
-})
-
-const Note = mongoose.model('Note', noteSchema)
 
 let notes = [
   {
@@ -40,6 +35,7 @@ let notes = [
     important: true
   }
 ]
+
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -116,7 +112,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
